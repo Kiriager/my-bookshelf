@@ -10,7 +10,11 @@ export class UserService {
   constructor(@InjectModel(User) private userRepository: typeof User) {}
 
   async create(dto: CreateUserDto) {
-    return this.userRepository.create(dto);
+    const user = {
+      email: dto.email,
+      passwordHash: await this.hashPassword(dto.password),
+    };
+    return this.userRepository.create(user);
   }
 
   async findAll() {
@@ -27,6 +31,16 @@ export class UserService {
     return user;
   }
 
+  async findOneByEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (user === null) {
+      throw new NotFoundException('User with the email not found');
+    }
+
+    return user;
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
@@ -38,5 +52,9 @@ export class UserService {
   async hashPassword(password: string) {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);
+  }
+
+  async isPasswordEqualsHash(password: string, hash: string) {
+    return await bcrypt.compare(password, hash);
   }
 }
