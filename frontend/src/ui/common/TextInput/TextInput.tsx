@@ -7,11 +7,7 @@ export interface TextInputProps {
 }
 
 const TextInput: React.FC<TextInputProps> = ({ labelText, errorText }) => {
-  const inputClassList = [
-    'focus:outline-none focus:ring-0 block w-full text-sm',
-    'placeholder:text-sm placeholder:text-placeholder:text-grey-greyscale placeholder:opacity-70',
-  ];
-
+  const inputClassList: Array<string> = ['bg-black'];
   const rootClassList: Array<string> = [];
 
   return (
@@ -20,6 +16,7 @@ const TextInput: React.FC<TextInputProps> = ({ labelText, errorText }) => {
       <div className='relative'>
         <input className={inputClassList.join(' ')} />
       </div>
+      <p className='text-red'>Text</p>
       {/* {anyError !== undefined && <InputError className='mt-0.25'>{anyError}</InputError>} */}
     </div>
   );

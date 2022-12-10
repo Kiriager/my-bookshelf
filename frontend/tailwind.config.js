@@ -3,8 +3,11 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {
-      spacing: {
-        128: '32rem',
+      height: {
+        input: '4rem',
+      },
+      borderRadius: {
+        standart: '0.25rem',
       },
     },
     colors: {

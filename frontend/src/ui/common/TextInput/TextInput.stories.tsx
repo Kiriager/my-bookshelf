@@ -15,13 +15,13 @@ Default.args = {};
 
 export const Focused = Template.bind({});
 Focused.args = {
-  autoFocus: true,
-  value: 'some text',
+  // autoFocus: true,
+  // value: 'some text',
 };
 
-export const Invalid = Template.bind({});
-Invalid.args = {
-  placeholder: 'example@email.com',
-  type: 'email',
-  value: 'not email value in email type',
-};
+// export const Invalid = Template.bind({});
+// Invalid.args = {
+//   placeholder: 'example@email.com',
+//   type: 'email',
+//   value: 'not email value in email type',
+// };
