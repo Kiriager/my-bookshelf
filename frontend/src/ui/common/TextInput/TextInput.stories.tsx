@@ -11,7 +11,9 @@ export default {
 const Template: ComponentStory<typeof TextInput> = args => <TextInput {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  placeholder: 'Email',
+};
 
 export const Focused = Template.bind({});
 Focused.args = {

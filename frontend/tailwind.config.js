@@ -3,6 +3,9 @@ module.exports = {
   darkMode: 'media',
   theme: {
     extend: {
+      fontFamily: {
+        gill: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif",
+      },
       height: {
         input: '4rem',
       },
