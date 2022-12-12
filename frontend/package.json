@@ -16,9 +16,12 @@
     "@types/redux-saga": "^0.10.5",
     "formik": "^2.2.9",
     "i18next": "^22.4.3",
+    "i18next-browser-languagedetector": "^6.1.8",
+    "i18next-http-backend": "^1.4.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^12.1.1",
+    "react-icons": "^4.7.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
@@ -28,7 +31,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "CHOKIDAR_USEPOLLING=true react-scripts start",
+    "start": "WATCHPACK_POLLING=true react-scripts start",
+    "start:local": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

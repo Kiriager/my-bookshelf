@@ -1,12 +1,14 @@
 {
   "general": {
-   
+
   },
   "auth": {
     "signInLabel": "Sign In",
-    "signUpLabel": "Sign Up"
+    "signUpLabel": "Sign Up",
+    "emailPlaceholder": "myemail@example.com",
+    "passwordPlaceholder": "Enter password"
   },
   "login": {
-    "registeredQuestion": "Don't have account yet?"
+    "registeredQuestion": "Don't have an account yet?"
   }
 }
