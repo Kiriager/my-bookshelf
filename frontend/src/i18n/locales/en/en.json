@@ -1,0 +1,12 @@
+{
+  "general": {
+   
+  },
+  "auth": {
+    "signInLabel": "Sign In",
+    "signUpLabel": "Sign Up"
+  },
+  "login": {
+    "registeredQuestion": "Don't have account yet?"
+  }
+}
