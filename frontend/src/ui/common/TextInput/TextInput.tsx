@@ -9,20 +9,11 @@ export interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({ labelText, errorText, placeholder }) => {
   const inputClassList: Array<string> = [
-    'border border-white-off/[0.3] rounded-standart block w-full h-input',
-    'p-6 placeholder:text-white-off/[0.3] font-gill bg-black text-white',
+    'border border-white-off/[0.3] rounded-standart block w-full h-input text-usual',
+    'p-6 placeholder:text-white-off/[0.3] font-gill bg-black text-white-pure',
   ];
-  const rootClassList: Array<string> = ['p-2 bg-black'];
 
-  return (
-    <div className={rootClassList.join(' ')}>
-      {/* {label !== undefined && <InputLabel className='mb-0.25'>{label}</InputLabel>} */}
-      <div className='relative'>
-        <input className={inputClassList.join(' ')} placeholder={placeholder} />
-      </div>
-      {/* {anyError !== undefined && <InputError className='mt-0.25'>{anyError}</InputError>} */}
-    </div>
-  );
+  return <input className={inputClassList.join(' ')} placeholder={placeholder} />;
 };
 
 export default TextInput;

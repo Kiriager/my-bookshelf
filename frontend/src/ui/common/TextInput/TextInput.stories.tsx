@@ -12,18 +12,5 @@ const Template: ComponentStory<typeof TextInput> = args => <TextInput {...args} 
 
 export const Default = Template.bind({});
 Default.args = {
-  placeholder: 'Email',
+  placeholder: 'example@email.com',
 };
-
-export const Focused = Template.bind({});
-Focused.args = {
-  // autoFocus: true,
-  // value: 'some text',
-};
-
-// export const Invalid = Template.bind({});
-// Invalid.args = {
-//   placeholder: 'example@email.com',
-//   type: 'email',
-//   value: 'not email value in email type',
-// };
