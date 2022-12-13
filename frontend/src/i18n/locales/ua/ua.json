@@ -1,0 +1,12 @@
+{
+  "general": {
+   
+  },
+  "auth": {
+    "signInLabel": "Увійти",
+    "signUpLabel": "Зареєструватись"
+  },
+  "login": {
+    "registeredQuestion": "Не маєте власного акаунта?"
+  }
+}
