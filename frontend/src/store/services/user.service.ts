@@ -1,28 +1,13 @@
-export interface User {
-  id: number;
-  email: string;
-  //role: Role;
-}
-
-// export async function getCurrentUser(): Promise<User | null> {
-//   try {
-//     const response = await apiAxios('/user/me');
-
-//     return { id: response.data.id, email: response.data.email, role: response.data.role };
-//   } catch (e) {
-//     if (e instanceof InvalidSessionError) {
-//       return null;
-//     }
-
-//     throw e;
-//   }
-// }
-
 import { AxiosError } from 'axios';
 import { requestApiUnauthorized } from './apiAxios';
 
 export interface LoginResult extends User {
   accessToken: string;
+}
+
+export interface User {
+  id: number;
+  email: string;
 }
 
 export class LoginServiceError extends Error {}
