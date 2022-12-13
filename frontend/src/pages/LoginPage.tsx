@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import TextInput from 'src/ui/common/TextInput/TextInput';
 import PasswordInput from 'src/ui/common/PasswordInput';
 import Button from 'src/ui/common/Button/Button';
+import { logInRequest } from 'src/store/slices/user/user.action';
+import { useAppDispatch } from 'src/hooks/store';
 
 interface LogInFormValues {
   email: string;
@@ -12,6 +14,8 @@ interface LogInFormValues {
 }
 
 const LogInPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
   const initialValues: LogInFormValues = { email: '', password: '' };
 
@@ -22,6 +26,7 @@ const LogInPage: React.FC = () => {
           initialValues={initialValues}
           onSubmit={values => {
             console.log(JSON.stringify(values, null, 2));
+            dispatch(logInRequest({ email: values.email, password: values.password }));
           }}
           validateOnMount
           validationSchema={Yup.object({
