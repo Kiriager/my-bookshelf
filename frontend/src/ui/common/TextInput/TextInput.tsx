@@ -1,6 +1,5 @@
 import { FieldProps } from 'formik';
 import React from 'react';
-import { string } from 'yup';
 //import { FieldProps } from 'formik';
 
 export interface TextInputProps {
