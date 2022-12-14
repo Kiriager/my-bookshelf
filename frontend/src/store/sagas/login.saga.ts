@@ -9,7 +9,6 @@ import { LogInRequestAction } from '../slices/user/user.types';
 export function* logInSaga(action: LogInRequestAction): SagaIterator {
   try {
     const loginResult = yield call(login, action.payload.email, action.payload.password);
-
     setUserAccessToken(loginResult.accessToken);
     yield put(logInSuccess({ id: loginResult.id, email: loginResult.email }));
   } catch (error) {
