@@ -1,26 +1,32 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import logo from 'src/icons/logo.svg';
 import './App.css';
+import { HOME_ROUTE, INDEX_ROUTE, LOGIN_ROUTE } from './config';
+import { useAppSelector } from './hooks/store';
+import HomePage from './pages/HomePage';
+import LogInPage from './pages/LoginPage';
 
 function App() {
-  return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const user = useAppSelector(state => state.user);
+
+  if (user.status === 'unauthorized') {
+    return (
+      <Routes>
+        <Route path={INDEX_ROUTE}>
+          <Route path={LOGIN_ROUTE} element={<LogInPage />} />
+        </Route>
+      </Routes>
+    );
+  } else {
+    return (
+      <Routes>
+        <Route path={INDEX_ROUTE}>
+          <Route path={HOME_ROUTE} element={<HomePage />} />
+        </Route>
+      </Routes>
+    );
+  }
 }
 
 export default App;
