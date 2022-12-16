@@ -8,9 +8,15 @@ export default {
   component: TextInput,
 } as ComponentMeta<typeof TextInput>;
 
-const Template: ComponentStory<typeof TextInput> = args => <TextInput {...args} />;
+const Template: ComponentStory<typeof TextInput> = args => (
+  <div className='bg-black p-10'>
+    <TextInput {...args} />
+  </div>
+);
 
 export const Default = Template.bind({});
 Default.args = {
-  placeholder: 'example@email.com',
+  labelText: 'label text',
+  placeholder: 'placeholder text',
+  errorText: 'error text',
 };

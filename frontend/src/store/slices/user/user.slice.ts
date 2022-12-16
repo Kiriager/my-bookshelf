@@ -4,8 +4,7 @@ import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from './user.action';
 import { UserActionTypes } from './user.types';
 
 export interface UserStateError {
-  type: 'unregistered' | 'invalidPassword';
-  message: string;
+  type: 'unregistered email' | 'incorrect password' | 'unknown error';
 }
 
 export interface UserState {
@@ -30,7 +29,7 @@ export const userReducer: Reducer<UserState, UserActionTypes> = (state = initial
       return {
         status: 'unauthorized',
         user: null,
-        error: action.payload.error,
+        error: action.payload,
       };
     default:
       return { ...state };

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto';
@@ -9,12 +9,15 @@ export class AuthService {
 
   async validateUser(email: string, pass: string) {
     const user = await this.userService.findOneByEmail(email);
-
-    if (user && this.userService.isPasswordEqualsHash(pass, user.passwordHash)) {
-      const { passwordHash, ...result } = user;
-      return result;
+    if (user === null) {
+      throw new UnauthorizedException({ statusCode: '401', error: 'unregistered email' });
     }
-    return null;
+    const passwordMatches = await this.userService.isPasswordEqualsHash(pass, user.passwordHash);
+    if (!passwordMatches) {
+      throw new UnauthorizedException({ statusCode: '401', error: 'incorrect password' });
+    }
+    const { passwordHash, ...result } = user;
+    return result;
   }
 
   async login(dto: LoginDto) {

@@ -17,7 +17,7 @@ const Button: React.FC<ButtonProps> = ({
   buttonType = 'button',
   onClick,
 }) => {
-  const styles: Array<string> = ['rounded-standart px-8 py-4 w-full block text-usual'];
+  const styles: Array<string> = ['rounded px-8 py-4 w-full block text-usual'];
   styles.push(
     format === 'secondary'
       ? 'text-text-primary bg-white-pure'

@@ -9,6 +9,8 @@
     "passwordPlaceholder": "Enter password"
   },
   "login": {
-    "registeredQuestion": "Don't have an account yet?"
+    "registeredQuestion": "Don't have an account yet?",
+    "unregisteredEmailMessage": "This email is not connected to any existing account.",
+    "incorrectPasswordMessage": "Incorrect password"
   }
 }

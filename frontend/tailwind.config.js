@@ -9,9 +9,6 @@ module.exports = {
       height: {
         input: '4rem',
       },
-      borderRadius: {
-        standart: '0.25rem',
-      },
       colors: {
         transparent: '#00000000',
         white: {
@@ -23,15 +20,18 @@ module.exports = {
           secondary: '#BEF3C0',
           tertiary: '#EFF7F2',
         },
-        border: '#E5E5E5',
+        borders: '#E5E5E5',
+        'input-borders': 'rgb(235 240 249 / 0.3)',
         text: {
           primary: '#1D2130',
           secondary: '#525560',
+          error: '#834D19',
         },
         black: '#0B0706',
       },
       fontSize: {
         usual: ['16px', '19px'],
+        sub: ['13px', '15px'],
       },
     },
   },

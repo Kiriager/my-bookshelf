@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { SagaIterator } from 'redux-saga';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { login } from '../services/user.service';
@@ -12,7 +13,13 @@ export function* logInSaga(action: LogInRequestAction): SagaIterator {
     setUserAccessToken(loginResult.accessToken);
     yield put(logInSuccess({ id: loginResult.id, email: loginResult.email }));
   } catch (error) {
-    yield put(logInFailed(error));
+    if (error instanceof AxiosError) {
+      if (error.response?.statusText === 'Unauthorized') {
+        yield put(logInFailed({ type: error.response.data.error }));
+      }
+    } else {
+      yield put(logInFailed(error));
+    }
   }
 }
 
