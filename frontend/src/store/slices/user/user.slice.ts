@@ -1,6 +1,13 @@
 import { Reducer } from 'redux';
 import { User } from 'src/store/services/user.service';
-import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from './user.action';
+import {
+  LOGIN_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  USER_PROFILE_FAILED,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+} from './user.action';
 import { UserActionTypes } from './user.types';
 
 export interface UserStateError {
@@ -30,6 +37,24 @@ export const userReducer: Reducer<UserState, UserActionTypes> = (state = initial
         status: 'unauthorized',
         user: null,
         error: action.payload,
+      };
+
+    case USER_PROFILE_REQUEST:
+      return {
+        ...state,
+        status: 'loggingIn',
+      };
+    case USER_PROFILE_FAILED:
+      return {
+        status: 'unauthorized',
+        user: null,
+        error: action.payload,
+      };
+    case USER_PROFILE_SUCCESS:
+      return {
+        status: 'authorized',
+        user: action.payload,
+        error: null,
       };
     default:
       return { ...state };

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
+import { getUserProfileRequest } from 'src/store/slices/user/user.action';
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -8,6 +9,10 @@ const HomePage: React.FC = () => {
   const user = useAppSelector(state => state.user);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    dispatch(getUserProfileRequest());
+  }, []);
 
   return (
     <div className='flex'>
