@@ -5,21 +5,21 @@ import { useTranslation } from 'react-i18next';
 import TextInput from 'src/ui/common/TextInput/TextInput';
 import PasswordInput from 'src/ui/common/PasswordInput';
 import Button from 'src/ui/common/Button/Button';
-import { logInRequest } from 'src/store/slices/user/user.action';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
+import { loginRequest } from 'src/store/slices/auth/auth.action';
 
-interface LogInFormValues {
+interface LoginFormValues {
   email: string;
   password: string;
 }
 
-const LogInPage: React.FC = () => {
+const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const user = useAppSelector(state => state.user);
+  const authState = useAppSelector(state => state.auth);
 
   const { t } = useTranslation();
-  const initialValues: LogInFormValues = { email: '', password: '' };
+  const initialValues: LoginFormValues = { email: '', password: '' };
 
   return (
     <div className='flex'>
@@ -27,8 +27,7 @@ const LogInPage: React.FC = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { resetForm }) => {
-            console.log(JSON.stringify(values, null, 2)); //________________________delete later
-            dispatch(logInRequest({ email: values.email, password: values.password }));
+            dispatch(loginRequest({ email: values.email, password: values.password }));
             resetForm();
           }}
           validateOnMount
@@ -45,7 +44,7 @@ const LogInPage: React.FC = () => {
               placeholder={t('auth.emailPlaceholder')}
               type='email'
               errorText={
-                user.error?.type == 'unregistered email'
+                authState.error?.type == 'unregistered email'
                   ? t('login.unregisteredEmailMessage')
                   : null
               }
@@ -57,7 +56,7 @@ const LogInPage: React.FC = () => {
               component={PasswordInput}
               placeholder={t('auth.passwordPlaceholder')}
               errorText={
-                user.error?.type == 'incorrect password'
+                authState.error?.type == 'incorrect password'
                   ? t('login.incorrectPasswordMessage')
                   : null
               }
@@ -77,4 +76,4 @@ const LogInPage: React.FC = () => {
   );
 };
 
-export default LogInPage;
+export default LoginPage;

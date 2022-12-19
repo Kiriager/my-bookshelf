@@ -5,16 +5,16 @@ import './App.css';
 import { HOME_ROUTE, INDEX_ROUTE, LOGIN_ROUTE } from './config';
 import { useAppSelector } from './hooks/store';
 import HomePage from './pages/HomePage';
-import LogInPage from './pages/LoginPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
-  const user = useAppSelector(state => state.user);
+  const authState = useAppSelector(state => state.auth);
 
-  if (user.status === 'unauthorized') {
+  if (authState.status === 'unauthorized') {
     return (
       <Routes>
         <Route path={INDEX_ROUTE}>
-          <Route path={LOGIN_ROUTE} element={<LogInPage />} />
+          <Route path={LOGIN_ROUTE} element={<LoginPage />} />
           <Route path='*' element={<Navigate replace to={LOGIN_ROUTE} />} />
           <Route index element={<Navigate replace to={LOGIN_ROUTE} />} />
         </Route>
