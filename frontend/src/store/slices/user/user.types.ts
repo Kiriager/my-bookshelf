@@ -3,6 +3,7 @@ import {
   LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
+  RESTORE_USER,
   USER_PROFILE_FAILED,
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
@@ -33,6 +34,10 @@ export interface UserProfileRequestAction {
   type: typeof USER_PROFILE_REQUEST;
 }
 
+export interface RestoreUserAction {
+  type: typeof RESTORE_USER;
+}
+
 export interface UserProfileSuccessAction {
   type: typeof USER_PROFILE_SUCCESS;
   payload: User;
@@ -49,4 +54,5 @@ export type UserActionTypes =
   | LogInFailedAction
   | UserProfileFailedAction
   | UserProfileRequestAction
-  | UserProfileSuccessAction;
+  | UserProfileSuccessAction
+  | RestoreUserAction;

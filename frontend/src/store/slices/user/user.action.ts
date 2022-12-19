@@ -4,6 +4,7 @@ import {
   LogInRequestAction,
   LogInRequestData,
   LogInSuccessAction,
+  RestoreUserAction,
   UserProfileFailedAction,
   UserProfileRequestAction,
   UserProfileSuccessAction,
@@ -15,6 +16,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS' as const;
 export const USER_PROFILE_REQUEST = 'USER_PROFILE_REQUEST' as const;
 export const USER_PROFILE_SUCCESS = 'USER_PROFILE_SUCCESS' as const;
 export const USER_PROFILE_FAILED = 'USER_PROFILE_FAILED' as const;
+export const RESTORE_USER = 'RESTORE_USER' as const;
 
 export function logInRequest(payload: LogInRequestData): LogInRequestAction {
   return { type: LOGIN_REQUEST, payload };
@@ -38,4 +40,8 @@ export function getUserProfileSuccess(payload: User): UserProfileSuccessAction {
 
 export function getUserProfileFailed(payload: any): UserProfileFailedAction {
   return { type: USER_PROFILE_FAILED, payload };
+}
+
+export function restoreUser(): RestoreUserAction {
+  return { type: RESTORE_USER };
 }

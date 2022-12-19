@@ -29,4 +29,14 @@ export class AuthService {
       id: user.id,
     };
   }
+
+  async restore(email: string) {
+    const user = await this.userService.findOneByEmail(email);
+    const payload = { username: user.email, sub: user.id };
+    return {
+      accessToken: this.jwtService.sign(payload),
+      email: user.email,
+      id: user.id,
+    };
+  }
 }

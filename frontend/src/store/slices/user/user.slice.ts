@@ -46,7 +46,7 @@ export const userReducer: Reducer<UserState, UserActionTypes> = (state = initial
       };
     case USER_PROFILE_FAILED:
       return {
-        status: 'unauthorized',
+        ...state,
         user: null,
         error: action.payload,
       };

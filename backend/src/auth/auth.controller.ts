@@ -15,8 +15,8 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req: any) {
-    return req.user;
+  @Post('restore')
+  restore(@Request() req: any) {
+    return this.authService.restore(req.user.email);
   }
 }

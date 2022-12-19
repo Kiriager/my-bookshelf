@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import logo from 'src/icons/logo.svg';
 import './App.css';
 import { HOME_ROUTE, INDEX_ROUTE, LOGIN_ROUTE } from './config';
@@ -15,6 +15,8 @@ function App() {
       <Routes>
         <Route path={INDEX_ROUTE}>
           <Route path={LOGIN_ROUTE} element={<LogInPage />} />
+          <Route path='*' element={<Navigate replace to={LOGIN_ROUTE} />} />
+          <Route index element={<Navigate replace to={LOGIN_ROUTE} />} />
         </Route>
       </Routes>
     );
@@ -23,6 +25,8 @@ function App() {
       <Routes>
         <Route path={INDEX_ROUTE}>
           <Route path={HOME_ROUTE} element={<HomePage />} />
+          <Route path='*' element={<Navigate replace to={HOME_ROUTE} />} />
+          <Route index element={<Navigate replace to={HOME_ROUTE} />} />
         </Route>
       </Routes>
     );
