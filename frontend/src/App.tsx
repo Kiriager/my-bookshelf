@@ -5,7 +5,7 @@ import './App.css';
 import { HOME_ROUTE, INDEX_ROUTE, LOGIN_ROUTE } from './config';
 import { useAppSelector } from './hooks/store';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/login/LoginPage';
 
 function App() {
   const authState = useAppSelector(state => state.auth);

@@ -10,6 +10,7 @@ export interface TextInputProps {
   type?: string;
   additionalStyles?: string;
   iconChild?: boolean;
+  suit?: 'dark' | 'light';
 }
 
 const TextInput: React.FC<TextInputProps & FieldProps> = ({
@@ -18,6 +19,7 @@ const TextInput: React.FC<TextInputProps & FieldProps> = ({
   errorText,
   placeholder,
   type = 'text',
+  suit = 'dark',
   additionalStyles = '',
   iconChild = false,
   children,
@@ -26,19 +28,37 @@ const TextInput: React.FC<TextInputProps & FieldProps> = ({
   ...props
 }) => {
   const inputClassList: Array<string> = [
-    'border border-input-borders rounded bg-black block w-full h-input p-6',
-    'text-usual font-gill text-white-off caret-borders',
-    'hover:placeholder:text-text-primary placeholder:text-text-secondary hover:text-green-secondary',
-    'focus:ring-0 focus:outline-none focus:border-green-primary',
+    'block w-full h-input text-usual font-gill caret-borders',
+    'placeholder:font-light focus:ring-0 focus:outline-none',
     additionalStyles,
   ];
+
+  const darkSuitClassList: Array<string> = [
+    'border border-input-borders rounded bg-black p-6 text-white-off',
+    'hover:placeholder:text-text-primary placeholder:text-text-secondary',
+    'hover:text-green-secondary focus:border-green-primary',
+  ];
+
+  const lightSuitClassList: Array<string> = [
+    'border-b border-transparent border-b-borders ph-6 pt-12 text-text-primary',
+    'hover:placeholder:text-borders placeholder:text-placeholder hover:text-text-label',
+    'focus:border-transparent focus:border-b-text-primary',
+  ];
+
+  const labelClassList: Array<string> = ['font-bold text-sub'];
+  const errorsClassList: Array<string> = ['text-text-error text-sub'];
+
+  if (suit === 'dark') {
+    inputClassList.push(...darkSuitClassList);
+    labelClassList.push('text-text-secondary');
+  } else if (suit === 'light') {
+    inputClassList.push(...lightSuitClassList);
+    labelClassList.push('text-text-label relative top-4');
+  }
 
   if (iconChild) {
     inputClassList.push('col-start-1 row-start-1');
   }
-
-  const labelClassList: Array<string> = ['text-text-secondary text-sub'];
-  const errorsClassList: Array<string> = ['text-text-error text-sub'];
 
   const errorsMessage =
     (field !== undefined &&

@@ -5,8 +5,12 @@
   "auth": {
     "signInLabel": "Sign In",
     "signUpLabel": "Sign Up",
+    "createAccountLabel": "Create account",
     "emailPlaceholder": "myemail@example.com",
-    "passwordPlaceholder": "Enter password"
+    "passwordPlaceholder": "Enter password",
+    "signupPanel": {
+      "title": "Create account"
+    }
   },
   "login": {
     "registeredQuestion": "Don't have an account yet?",

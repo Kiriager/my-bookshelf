@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LogInPage from './pages/LoginPage';
+import LogInPage from './pages/login/LoginPage';
 import './i18n/config';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';

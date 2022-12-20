@@ -9,7 +9,6 @@ import {
   LOGIN_REQUEST,
   restoreSessionFailed,
   restoreSessionRequest,
-  RESTORE_SESSION_REQUEST,
 } from '../slices/auth/auth.action';
 import { LoginRequestAction } from '../slices/auth/auth.types';
 import { authorizeUser, unauthorizeUser } from '../slices/user/user.action';

@@ -7,6 +7,8 @@ import PasswordInput from 'src/ui/common/PasswordInput';
 import Button from 'src/ui/common/Button/Button';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
 import { loginRequest } from 'src/store/slices/auth/auth.action';
+import { useNavigate } from 'react-router-dom';
+import { SIGNIN_ROUTE } from 'src/config';
 
 interface LoginFormValues {
   email: string;
@@ -15,6 +17,7 @@ interface LoginFormValues {
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const authState = useAppSelector(state => state.auth);
 
@@ -71,6 +74,14 @@ const LoginPage: React.FC = () => {
             />
           </Form>
         </Formik>
+        <Button
+          id='submit-registration'
+          name='submit-registration'
+          onClick={() => navigate(SIGNIN_ROUTE)}
+          buttonType='button'
+          title={t('auth.createAccountLabel')}
+          format='secondary'
+        />
       </div>
     </div>
   );

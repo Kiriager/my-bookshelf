@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   const styles: Array<string> = ['rounded px-8 py-4 w-full block text-usual'];
   styles.push(
     format === 'secondary'
-      ? 'text-text-primary bg-white-pure'
+      ? 'text-text-primary bg-white-pure hover:underline'
       : format === 'navbar'
       ? 'text-white-pure bg-text-primary'
       : 'text-white-pure bg-green-primary',
