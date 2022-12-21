@@ -7,10 +7,11 @@
     "signUpLabel": "Sign Up",
     "createAccountLabel": "Create account",
     "emailPlaceholder": "myemail@example.com",
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Password",
+    "passwordConfirmationFieldLabel": "Confirm password",
     "passwordPlaceholder": "Enter password",
-    "signupPanel": {
-      "title": "Create account"
-    }
+    "signupPanelTitle": "Create account"
   },
   "login": {
     "registeredQuestion": "Don't have an account yet?",

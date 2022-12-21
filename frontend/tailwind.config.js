@@ -40,6 +40,9 @@ module.exports = {
         'main-box-shadow': '0px 4px 16px rgba(29, 101, 137, 0.15)',
         'border-b': '0px 1px rgba(229, 229, 229, 0.75)',
       },
+      gridTemplateColumns: {
+        modal: 'minmax(auto, 500px)',
+      },
     },
   },
   variants: {

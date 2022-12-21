@@ -1,6 +1,5 @@
 import { FieldProps } from 'formik';
 import React from 'react';
-//import { FieldProps } from 'formik';
 
 export interface TextInputProps {
   id?: string;
@@ -23,8 +22,8 @@ const TextInput: React.FC<TextInputProps & FieldProps> = ({
   additionalStyles = '',
   iconChild = false,
   children,
-  field, // { name, value, onChange, onBlur }
-  form, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+  field,
+  form,
   ...props
 }) => {
   const inputClassList: Array<string> = [
@@ -47,13 +46,16 @@ const TextInput: React.FC<TextInputProps & FieldProps> = ({
 
   const labelClassList: Array<string> = ['font-bold text-sub'];
   const errorsClassList: Array<string> = ['text-text-error text-sub'];
+  const iconClassList: Array<string> = ['col-start-1 row-start-1 justify-self-end mr-4 mb-1'];
 
   if (suit === 'dark') {
     inputClassList.push(...darkSuitClassList);
     labelClassList.push('text-text-secondary');
+    iconClassList.push('self-center');
   } else if (suit === 'light') {
     inputClassList.push(...lightSuitClassList);
     labelClassList.push('text-text-label relative top-4');
+    iconClassList.push('self-end');
   }
 
   if (iconChild) {
@@ -84,11 +86,7 @@ const TextInput: React.FC<TextInputProps & FieldProps> = ({
           {...field}
           {...props}
         />
-        {iconChild ? (
-          <div className='col-start-1 row-start-1 self-center justify-self-end mr-4'>
-            {children}
-          </div>
-        ) : null}
+        {iconChild ? <div className={iconClassList.join(' ')}>{children}</div> : null}
       </div>
       {errorsMessage !== undefined ? (
         <p className={errorsClassList.join(' ')}>{errorsMessage}</p>

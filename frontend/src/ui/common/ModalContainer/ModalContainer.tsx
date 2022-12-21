@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
+import { AiFillCloseSquare } from 'react-icons/ai';
 
 export interface ModalContainerProps {
-  title: string;
-  additionalStyle?: string;
+  title?: string;
+  onClose?: MouseEventHandler;
 }
 
-const ModalContainer: React.FC<ModalContainerProps> = ({ title, children }) => {
+const ModalContainer: React.FC<ModalContainerProps> = ({ title, onClose, children }) => {
   const panelClassList: Array<string> = [
-    'absolute flex flex-col top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 gap-8 p-8 w-102.5',
-    'bg-white-pure rounded-lg text-center shadow-main-box-shadow',
+    'm-auto flex flex-col gap-8 p-12 w-96 w-full',
+    'bg-white-pure rounded-lg shadow-main-box-shadow',
   ];
 
   return (
-    <div className={'fixed top-0 bottom-0 left-0 right-0 bg-borders bg-opacity-60'}>
+    <div className='p-4 bg-borders bg-opacity-60 grid grid-cols-modal justify-center'>
       <div className={panelClassList.join(' ')}>
-        <h3 className='text-primary'>{title}</h3>
+        <header className='flex justify-between'>
+          {title ? <h3 className='text-primary'>{title}</h3> : null}
+          <AiFillCloseSquare
+            className='text-3xl relative -top-6 -right-6 cursor-pointer'
+            onClick={onClose}
+          />
+        </header>
         {children}
       </div>
     </div>

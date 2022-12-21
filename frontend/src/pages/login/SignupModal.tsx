@@ -21,7 +21,7 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
   const initialValues = { email: '', password: '', passwordConfirmation: '' };
 
   return (
-    <ModalContainer title={t('auth.signupPanel.title')}>
+    <ModalContainer title={String(t('auth.signupPanelTitle'))}>
       <p>Some text</p>
       <Formik
         initialValues={initialValues}
@@ -40,8 +40,9 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
             id='email'
             component={TextInput}
             name='email'
-            placeholder={t('auth.emailPlaceholder')}
             type='email'
+            suit='light'
+            labelText={t('auth.emailFieldLabel')}
             errorText={
               authState.error?.type == 'unregistered email'
                 ? t('login.unregisteredEmailMessage')
@@ -53,7 +54,8 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
             name='password'
             type='password'
             component={PasswordInput}
-            placeholder={t('auth.passwordPlaceholder')}
+            suit='light'
+            labelText={t('auth.passwordFieldLabel')}
             errorText={
               authState.error?.type == 'incorrect password'
                 ? t('login.incorrectPasswordMessage')
@@ -65,7 +67,8 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
             name='passwordConfirmation'
             type='password'
             component={PasswordInput}
-            placeholder={t('auth.passwordPlaceholder')}
+            labelText={t('auth.passwordConfirmationFieldLabel')}
+            suit='light'
             errorText={
               authState.error?.type == 'incorrect password'
                 ? t('login.incorrectPasswordMessage')
@@ -77,7 +80,7 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
             name='submit-registration'
             onClick={() => undefined}
             buttonType='submit'
-            title={t('auth.signInLabel')}
+            title={t('auth.signUpLabel')}
             format='secondary'
           />
         </Form>
