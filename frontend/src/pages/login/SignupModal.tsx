@@ -2,27 +2,22 @@ import { Formik, Form, Field } from 'formik';
 import { t } from 'i18next';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { signUpSchema } from 'src/config/validationSchemas';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
 import { loginRequest } from 'src/store/slices/auth/auth.action';
 import Button from 'src/ui/common/Button/Button';
-import ModalContainer from 'src/ui/common/ModalContainer/ModalContainer';
+import ModalContainer, { ModalContainerProps } from 'src/ui/common/ModalContainer/ModalContainer';
 import PasswordInput from 'src/ui/common/PasswordInput';
 import TextInput from 'src/ui/common/TextInput/TextInput';
-import * as Yup from 'yup';
 
-export interface SignupPanelProps {
-  additionalStyle?: string;
-}
-
-const SignupPanel: React.FC<SignupPanelProps> = () => {
+const SignUpModal: React.FC<Partial<ModalContainerProps>> = ({ onClose }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const authState = useAppSelector(state => state.auth);
   const initialValues = { email: '', password: '', passwordConfirmation: '' };
 
   return (
-    <ModalContainer title={String(t('auth.signupPanelTitle'))}>
-      <p>Some text</p>
+    <ModalContainer title={String(t('auth.signupPanelTitle'))} onClose={onClose}>
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { resetForm }) => {
@@ -30,10 +25,7 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
           resetForm();
         }}
         validateOnMount
-        validationSchema={Yup.object({
-          email: Yup.string().required('Email is required').email('The email is invalid'),
-          password: Yup.string().required('Password is required'),
-        })}
+        validationSchema={signUpSchema}
       >
         <Form className='grid grid-cols-1 gap-4'>
           <Field
@@ -81,7 +73,7 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
             onClick={() => undefined}
             buttonType='submit'
             title={t('auth.signUpLabel')}
-            format='secondary'
+            format='navbar'
           />
         </Form>
       </Formik>
@@ -89,4 +81,4 @@ const SignupPanel: React.FC<SignupPanelProps> = () => {
   );
 };
 
-export default SignupPanel;
+export default SignUpModal;

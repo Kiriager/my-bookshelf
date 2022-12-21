@@ -13,10 +13,10 @@ const ModalContainer: React.FC<ModalContainerProps> = ({ title, onClose, childre
   ];
 
   return (
-    <div className='p-4 bg-borders bg-opacity-60 grid grid-cols-modal justify-center'>
+    <div className='fixed w-full h-screen p-4 bg-borders bg-opacity-60 grid grid-cols-modal justify-center'>
       <div className={panelClassList.join(' ')}>
         <header className='flex justify-between'>
-          {title ? <h3 className='text-primary'>{title}</h3> : null}
+          {title !== undefined ? <h3 className='text-primary'>{title}</h3> : null}
           <AiFillCloseSquare
             className='text-3xl relative -top-6 -right-6 cursor-pointer'
             onClick={onClose}
