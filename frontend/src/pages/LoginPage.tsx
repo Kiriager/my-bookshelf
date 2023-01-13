@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
@@ -7,7 +7,8 @@ import PasswordInput from 'src/ui/common/PasswordInput';
 import Button from 'src/ui/common/Button/Button';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
 import { loginRequest } from 'src/store/slices/auth/auth.action';
-import SignUpModal from './SignUpModal';
+import { useNavigate } from 'react-router-dom';
+import { SIGNUP_ROUTE } from 'src/config';
 
 interface LoginFormValues {
   email: string;
@@ -16,8 +17,7 @@ interface LoginFormValues {
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  const [isOpenSignUpModal, setIsOpenSignUpModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const authState = useAppSelector(state => state.auth);
 
@@ -77,14 +77,12 @@ const LoginPage: React.FC = () => {
         <Button
           id='submit-registration'
           name='submit-registration'
-          onClick={() => setIsOpenSignUpModal(true)}
+          onClick={() => navigate(SIGNUP_ROUTE)}
           buttonType='button'
           title={t('auth.createAccountLabel')}
           format='secondary'
         />
       </div>
-
-      {isOpenSignUpModal ? <SignUpModal onClose={() => setIsOpenSignUpModal(false)} /> : null}
     </div>
   );
 };

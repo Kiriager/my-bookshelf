@@ -5,6 +5,7 @@
   "auth": {
     "signInLabel": "Sign In",
     "signUpLabel": "Sign Up",
+    "backToSignInLabel": "Back to sign in",
     "createAccountLabel": "Create account",
     "emailPlaceholder": "myemail@example.com",
     "emailFieldLabel": "Email",
