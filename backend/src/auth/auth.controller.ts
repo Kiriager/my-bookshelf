@@ -1,6 +1,7 @@
 import { Controller, Post, UseGuards, Body, Get, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto';
+import { RegistrationDto } from './dto/registrationDto.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 
@@ -18,5 +19,10 @@ export class AuthController {
   @Post('restore')
   restore(@Request() req: any) {
     return this.authService.restore(req.user.email);
+  }
+
+  @Post('register')
+  register(@Body() dto: RegistrationDto) {
+    return this.authService.register(dto);
   }
 }

@@ -18,7 +18,7 @@ export class UserService {
   }
 
   async findAll() {
-    return this.userRepository.findAll();
+    return this.userRepository.findAll({ attributes: { exclude: ['passwordHash'] } });
   }
 
   async findOne(id: number) {
