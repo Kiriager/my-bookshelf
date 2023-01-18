@@ -6,14 +6,15 @@ import TextInput from 'src/ui/common/TextInput/TextInput';
 import PasswordInput from 'src/ui/common/PasswordInput';
 import Button from 'src/ui/common/Button/Button';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
-import { loginRequest } from 'src/store/slices/auth/auth.action';
+import { registrationRequest } from 'src/store/slices/auth/auth.action';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE } from 'src/config';
 import { signUpSchema } from 'src/config/validationSchemas';
 
-interface LoginFormValues {
+interface RegisterFormValues {
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
 const LoginPage: React.FC = () => {
@@ -23,7 +24,7 @@ const LoginPage: React.FC = () => {
   const authState = useAppSelector(state => state.auth);
 
   const { t } = useTranslation();
-  const initialValues: LoginFormValues = { email: '', password: '' };
+  const initialValues: RegisterFormValues = { email: '', password: '', passwordConfirmation: '' };
 
   return (
     <div className='flex'>
@@ -31,7 +32,7 @@ const LoginPage: React.FC = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={(values, { resetForm }) => {
-            dispatch(loginRequest({ email: values.email, password: values.password }));
+            dispatch(registrationRequest({ email: values.email, password: values.password }));
             resetForm();
           }}
           validateOnMount
@@ -45,11 +46,11 @@ const LoginPage: React.FC = () => {
               type='email'
               suit='light'
               labelText={t('auth.emailFieldLabel')}
-              errorText={
-                authState.error?.type == 'unregistered email'
-                  ? t('login.unregisteredEmailMessage')
-                  : null
-              }
+              // errorText={
+              //   authState.error?.type == 'unregistered email'
+              //     ? t('login.unregisteredEmailMessage')
+              //     : null
+              // }
             />
             <Field
               id='password'
@@ -58,11 +59,6 @@ const LoginPage: React.FC = () => {
               component={PasswordInput}
               suit='light'
               labelText={t('auth.passwordFieldLabel')}
-              errorText={
-                authState.error?.type == 'incorrect password'
-                  ? t('login.incorrectPasswordMessage')
-                  : null
-              }
             />
             <Field
               id='passwordConfirmation'
@@ -71,11 +67,6 @@ const LoginPage: React.FC = () => {
               component={PasswordInput}
               labelText={t('auth.passwordConfirmationFieldLabel')}
               suit='light'
-              errorText={
-                authState.error?.type == 'incorrect password'
-                  ? t('login.incorrectPasswordMessage')
-                  : null
-              }
             />
             <Button
               id='submit-registration'

@@ -5,6 +5,7 @@ import {
   RESTORE_SESSION_REQUEST,
   RESTORE_SESSION_FAILED,
   RESTORE_SESSION_SUCCESS,
+  REGISTRATION_REQUEST,
 } from './auth.action';
 import { AuthError } from './auth.slice';
 
@@ -27,6 +28,25 @@ export interface LoginFailedAction {
   payload: AuthError;
 }
 
+export interface RegistrationRequestData {
+  email: string;
+  password: string;
+}
+
+export interface RegistrationRequestAction {
+  type: typeof REGISTRATION_REQUEST;
+  payload: RegistrationRequestData;
+}
+
+// export interface LoginSuccessAction {
+//   type: typeof LOGIN_SUCCESS;
+// }
+
+// export interface LoginFailedAction {
+//   type: typeof LOGIN_FAILED;
+//   payload: AuthError;
+// }
+
 export interface RestoreSessionRequestAction {
   type: typeof RESTORE_SESSION_REQUEST;
 }
@@ -44,6 +64,7 @@ export type AuthActionTypes =
   | LoginRequestAction
   | LoginSuccessAction
   | LoginFailedAction
+  | RegistrationRequestAction
   | RestoreSessionRequestAction
   | RestoreSessionSuccessAction
   | RestoreSessionFailedAction;
