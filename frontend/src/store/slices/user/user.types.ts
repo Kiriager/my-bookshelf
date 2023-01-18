@@ -1,24 +1,39 @@
 import { User } from 'src/store/services/user.service';
-import { LOGIN_FAILED, LOGIN_REQUEST, LOGIN_SUCCESS } from './user.action';
+import {
+  AUTHORIZE_USER,
+  UNAUTHORIZE_USER,
+  USER_PROFILE_FAILED,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+} from './user.action';
 
-export interface LogInRequestAction {
-  type: typeof LOGIN_REQUEST;
-  payload: LogInRequestData;
+export interface UserProfileRequestAction {
+  type: typeof USER_PROFILE_REQUEST;
 }
 
-export interface LogInSuccessAction {
-  type: typeof LOGIN_SUCCESS;
+export interface UserProfileSuccessAction {
+  type: typeof USER_PROFILE_SUCCESS;
   payload: User;
 }
 
-export interface LogInFailedAction {
-  type: typeof LOGIN_FAILED;
+export interface UserProfileFailedAction {
+  type: typeof USER_PROFILE_FAILED;
   payload: any;
 }
 
-export interface LogInRequestData {
-  email: string;
-  password: string;
+export interface AuthorizeUserAction {
+  type: typeof AUTHORIZE_USER;
+  payload: User;
 }
 
-export type UserActionTypes = LogInRequestAction | LogInSuccessAction | LogInFailedAction;
+export interface UnauthorizeUserAction {
+  type: typeof UNAUTHORIZE_USER;
+  payload: any;
+}
+
+export type UserActionTypes =
+  | UserProfileFailedAction
+  | UserProfileRequestAction
+  | UserProfileSuccessAction
+  | AuthorizeUserAction
+  | UnauthorizeUserAction;

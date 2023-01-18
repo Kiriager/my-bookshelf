@@ -1,6 +1,6 @@
 import { all, call } from 'redux-saga/effects';
-import { watchLoginRequest } from './login.saga';
+import { authWatchSaga, restoreSessionSaga } from './auth.saga';
 
 export default function* rootSaga() {
-  yield all([call(watchLoginRequest)]);
+  yield all([call(restoreSessionSaga), call(authWatchSaga)]);
 }

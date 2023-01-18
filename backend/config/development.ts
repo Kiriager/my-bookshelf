@@ -6,3 +6,5 @@ export const development = {
   host: process.env.DB_HOST || 'localhost',
   dialect: 'postgres',
 } as const;
+
+export const jwtSecret = process.env.JWT_SECRET;

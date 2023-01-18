@@ -8,7 +8,8 @@ import Button from 'src/ui/common/Button/Button';
 import { useAppDispatch, useAppSelector } from 'src/hooks/store';
 import { loginRequest } from 'src/store/slices/auth/auth.action';
 import { useNavigate } from 'react-router-dom';
-import { SIGNUP_ROUTE } from 'src/config';
+import { LOGIN_ROUTE } from 'src/config';
+import { signUpSchema } from 'src/config/validationSchemas';
 
 interface LoginFormValues {
   email: string;
@@ -34,18 +35,16 @@ const LoginPage: React.FC = () => {
             resetForm();
           }}
           validateOnMount
-          validationSchema={Yup.object({
-            email: Yup.string().required('Email is required').email('The email is invalid'),
-            password: Yup.string().required('Password is required'),
-          })}
+          validationSchema={signUpSchema}
         >
-          <Form className='p-8 bg-black rounded-lg grid grid-cols-1 gap-4'>
+          <Form className='grid grid-cols-1 gap-4'>
             <Field
               id='email'
               component={TextInput}
               name='email'
-              placeholder={t('auth.emailPlaceholder')}
               type='email'
+              suit='light'
+              labelText={t('auth.emailFieldLabel')}
               errorText={
                 authState.error?.type == 'unregistered email'
                   ? t('login.unregisteredEmailMessage')
@@ -57,7 +56,21 @@ const LoginPage: React.FC = () => {
               name='password'
               type='password'
               component={PasswordInput}
-              placeholder={t('auth.passwordPlaceholder')}
+              suit='light'
+              labelText={t('auth.passwordFieldLabel')}
+              errorText={
+                authState.error?.type == 'incorrect password'
+                  ? t('login.incorrectPasswordMessage')
+                  : null
+              }
+            />
+            <Field
+              id='passwordConfirmation'
+              name='passwordConfirmation'
+              type='password'
+              component={PasswordInput}
+              labelText={t('auth.passwordConfirmationFieldLabel')}
+              suit='light'
               errorText={
                 authState.error?.type == 'incorrect password'
                   ? t('login.incorrectPasswordMessage')
@@ -69,17 +82,17 @@ const LoginPage: React.FC = () => {
               name='submit-registration'
               onClick={() => undefined}
               buttonType='submit'
-              title={t('auth.signInLabel')}
-              format='secondary'
+              title={t('auth.signUpLabel')}
+              format='navbar'
             />
           </Form>
         </Formik>
         <Button
           id='submit-registration'
           name='submit-registration'
-          onClick={() => navigate(SIGNUP_ROUTE)}
+          onClick={() => navigate(LOGIN_ROUTE)}
           buttonType='button'
-          title={t('auth.createAccountLabel')}
+          title={t('auth.backToSignInLabel')}
           format='secondary'
         />
       </div>

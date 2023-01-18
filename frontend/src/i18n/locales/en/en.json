@@ -5,10 +5,18 @@
   "auth": {
     "signInLabel": "Sign In",
     "signUpLabel": "Sign Up",
+    "backToSignInLabel": "Back to sign in",
+    "createAccountLabel": "Create account",
     "emailPlaceholder": "myemail@example.com",
-    "passwordPlaceholder": "Enter password"
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Password",
+    "passwordConfirmationFieldLabel": "Confirm password",
+    "passwordPlaceholder": "Enter password",
+    "signupPanelTitle": "Create account"
   },
   "login": {
-    "registeredQuestion": "Don't have an account yet?"
+    "registeredQuestion": "Don't have an account yet?",
+    "unregisteredEmailMessage": "This email is not connected to any existing account.",
+    "incorrectPasswordMessage": "Incorrect password"
   }
 }

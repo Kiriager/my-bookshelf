@@ -8,9 +8,31 @@ export default {
   component: TextInput,
 } as ComponentMeta<typeof TextInput>;
 
-const Template: ComponentStory<typeof TextInput> = args => <TextInput {...args} />;
+const Template: ComponentStory<typeof TextInput> = args => {
+  let containerStyle = 'p-10 ';
+  if (args.suit === 'dark') {
+    containerStyle += 'bg-black';
+  }
 
-export const Default = Template.bind({});
-Default.args = {
-  placeholder: 'example@email.com',
+  return (
+    <div className={containerStyle}>
+      <TextInput {...args} />
+    </div>
+  );
+};
+
+export const Dark = Template.bind({});
+Dark.args = {
+  labelText: 'label text',
+  placeholder: 'placeholder text',
+  errorText: 'error text',
+  suit: 'dark',
+};
+
+export const Light = Template.bind({});
+Light.args = {
+  labelText: 'label text',
+  placeholder: 'placeholder text',
+  errorText: 'error text',
+  suit: 'light',
 };

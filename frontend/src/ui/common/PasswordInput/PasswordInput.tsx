@@ -8,20 +8,18 @@ const PasswordInput: React.FC<TextInputProps & FieldProps> = ({
   ...otherProps
 }) => {
   const [passwordIsShown, setPasswordIsShown] = useState(false);
-  const iconStyle =
-    'w-6 h-6 text-white-off col-start-1 row-start-1 self-center justify-self-end mr-4';
+  const iconStyle = 'w-6 h-6 text-text-secondary';
 
-  const props = { additionalStyles: additionalStyles + ' col-start-1 row-start-1 ', ...otherProps };
+  const props = { additionalStyles: additionalStyles + '', ...otherProps };
 
   return (
-    <div className='grid'>
-      <TextInput {...props} type={passwordIsShown ? 'text' : 'password'} />
+    <TextInput {...props} type={passwordIsShown ? 'text' : 'password'} iconChild={true}>
       {passwordIsShown ? (
         <AiOutlineEyeInvisible onClick={() => setPasswordIsShown(false)} className={iconStyle} />
       ) : (
         <AiOutlineEye onClick={() => setPasswordIsShown(true)} className={iconStyle} />
       )}
-    </div>
+    </TextInput>
   );
 };
 

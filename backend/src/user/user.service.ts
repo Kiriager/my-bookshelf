@@ -10,11 +10,15 @@ export class UserService {
   constructor(@InjectModel(User) private userRepository: typeof User) {}
 
   async create(dto: CreateUserDto) {
-    return this.userRepository.create(dto);
+    const user = {
+      email: dto.email,
+      passwordHash: await this.hashPassword(dto.password),
+    };
+    return this.userRepository.create(user);
   }
 
   async findAll() {
-    return this.userRepository.findAll();
+    return this.userRepository.findAll({ attributes: { exclude: ['passwordHash'] } });
   }
 
   async findOne(id: number) {
@@ -25,6 +29,10 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async findOneByEmail(email: string) {
+    return await this.userRepository.findOne({ where: { email } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
@@ -38,5 +46,9 @@ export class UserService {
   async hashPassword(password: string) {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);
+  }
+
+  async isPasswordEqualsHash(password: string, hash: string) {
+    return await bcrypt.compare(password, hash);
   }
 }
