@@ -17,8 +17,8 @@ function App() {
         <Route path={INDEX_ROUTE}>
           <Route path={LOGIN_ROUTE} element={<LoginPage />} />
           <Route path={SIGNUP_ROUTE} element={<SignUpPage />} />
-          <Route path='*' element={<Navigate replace to={LOGIN_ROUTE} />} />
-          <Route index element={<Navigate replace to={LOGIN_ROUTE} />} />
+          <Route path='*' element={<Navigate replace to={HOME_ROUTE} />} />
+          <Route index element={<Navigate replace to={HOME_ROUTE} />} />
         </Route>
       </Routes>
     );

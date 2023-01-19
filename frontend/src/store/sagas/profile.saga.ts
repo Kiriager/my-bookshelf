@@ -11,7 +11,7 @@ import {
   //restoreSessionRequest,
 } from '../slices/auth/auth.action';
 import { LoginRequestAction } from '../slices/auth/auth.types';
-import { authorizeUser, unauthorizeUser } from '../slices/user/user.action';
+import { authorizeUser, getUserProfileSuccess, unauthorizeUser } from '../slices/user/user.action';
 
 export function* loginSaga(action: LoginRequestAction): SagaIterator {
   try {
@@ -30,18 +30,17 @@ export function* loginSaga(action: LoginRequestAction): SagaIterator {
   }
 }
 
-// export function* restoreSessionSaga(): SagaIterator {
-//   try {
-//     yield put(restoreSessionRequest());
-//     const currentUser = yield call(fetchUser);
-//     setUserAccessToken(currentUser.accessToken);
-//     yield put(authorizeUser({ id: currentUser.id, email: currentUser.email }));
-//   } catch (error) {
-//     yield put(restoreSessionFailed(error));
-//     yield put(unauthorizeUser({}));
-//   }
-// }
+export function* profileSaga(): SagaIterator {
+  try {
+    const currentUser = yield call(fetchUser);
+    //setUserAccessToken(currentUser.accessToken);
+    //yield put(authorizeUser({ id: currentUser.id, email: currentUser.email }));
+    yield put(getUserProfileSuccess({ id: currentUser.id, email: currentUser.email }));
+  } catch (error) {
+    yield put(unauthorizeUser({}));
+  }
+}
 
-export function* authWatchSaga(): SagaIterator {
+export function* profileWatchSaga(): SagaIterator {
   yield takeLatest(LOGIN_REQUEST, loginSaga);
 }

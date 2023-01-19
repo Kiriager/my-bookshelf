@@ -12,7 +12,7 @@ export class UserService {
   async create(dto: CreateUserDto) {
     const user = {
       email: dto.email,
-      passwordHash: await this.hashPassword(dto.password),
+      passwordHash: await this.hashData(dto.password),
     };
     return this.userRepository.create(user);
   }
@@ -43,12 +43,17 @@ export class UserService {
     return `This action removes a #${id} user`;
   }
 
-  async hashPassword(password: string) {
+  async hashData(password: string) {
     const saltOrRounds = 10;
     return await bcrypt.hash(password, saltOrRounds);
   }
 
   async isPasswordEqualsHash(password: string, hash: string) {
     return await bcrypt.compare(password, hash);
+  }
+
+  async updateRefreshTokenHash(userId: number, refreshToken: string) {
+    const refreshTokenHash = await this.hashData(refreshToken);
+    await this.userRepository.update({ refreshTokenHash }, { where: { id: userId } });
   }
 }

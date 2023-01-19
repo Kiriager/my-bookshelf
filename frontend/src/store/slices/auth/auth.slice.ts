@@ -34,18 +34,18 @@ export const authReducer: Reducer<AuthState, AuthActionTypes> = (state = initial
         status: 'unauthorized',
         error: action.payload,
       };
-    case RESTORE_SESSION_REQUEST:
-      return { status: 'restoring', error: null };
-    case RESTORE_SESSION_SUCCESS:
-      return {
-        status: 'authorized',
-        error: null,
-      };
-    case RESTORE_SESSION_FAILED:
-      return {
-        status: 'unauthorized',
-        error: action.payload,
-      };
+    // case RESTORE_SESSION_REQUEST:
+    //   return { status: 'restoring', error: null };
+    // case RESTORE_SESSION_SUCCESS:
+    //   return {
+    //     status: 'authorized',
+    //     error: null,
+    //   };
+    // case RESTORE_SESSION_FAILED:
+    //   return {
+    //     status: 'unauthorized',
+    //     error: action.payload,
+    //   };
     default:
       return { ...state };
   }

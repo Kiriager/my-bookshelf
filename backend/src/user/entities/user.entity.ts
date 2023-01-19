@@ -8,4 +8,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 
   @Column({ type: DataType.STRING, allowNull: false })
   passwordHash: string;
+
+  @Column({ type: DataType.STRING })
+  refreshTokenHash: string;
 }

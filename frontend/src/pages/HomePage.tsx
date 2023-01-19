@@ -10,9 +10,9 @@ const HomePage: React.FC = () => {
 
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   dispatch(getUserProfileRequest());
-  // }, []);
+  useEffect(() => {
+    dispatch(getUserProfileRequest());
+  }, []);
 
   return (
     <div className='flex'>

@@ -1,9 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { jwtAccessSecret, jwtRefreshSecret } from 'config';
 import { UserService } from 'src/user/user.service';
-import { LoginDto } from './dto';
+import { AuthDto } from './dto';
 import { RegistrationDto } from './dto/registrationDto.dto';
 import { TakenEmailException } from './ecxeptions/taken-email.exception';
+import { TokensPair } from './types';
+import { TokenData } from './types/token-data.type copy';
 
 @Injectable()
 export class AuthService {
@@ -22,9 +25,29 @@ export class AuthService {
     return result;
   }
 
-  async login(dto: LoginDto) {
+  async login(dto: AuthDto) {
     const user = await this.userService.findOneByEmail(dto.email);
-    const payload = { username: dto.email, sub: user.id };
+    const tokens = await this.generateTokens({ email: dto.email, sub: user.id });
+    await this.userService.updateRefreshTokenHash(user.id, tokens.refresh_token);
+    return tokens;
+  }
+
+  async register(dto: RegistrationDto): Promise<TokensPair> {
+    const candidate = await this.userService.findOneByEmail(dto.email);
+
+    if (candidate === null) {
+      const user = await this.userService.create(dto);
+      const tokens = await this.generateTokens({ email: dto.email, sub: user.id });
+      await this.userService.updateRefreshTokenHash(user.id, tokens.refresh_token);
+      return tokens;
+    } else {
+      throw new TakenEmailException();
+    }
+  }
+
+  async refresh(email: string) {
+    const user = await this.userService.findOneByEmail(email);
+    const payload = { username: user.email, sub: user.id };
     return {
       accessToken: this.jwtService.sign(payload),
       email: user.email,
@@ -32,28 +55,23 @@ export class AuthService {
     };
   }
 
-  async register(dto: RegistrationDto) {
-    const candidate = await this.userService.findOneByEmail(dto.email);
-    if (candidate === null) {
-      const user = await this.userService.create(dto);
-      const payload = { username: dto.email, sub: user.id };
-      return {
-        accessToken: this.jwtService.sign(payload),
-        email: user.email,
-        id: user.id,
-      };
-    } else {
-      throw new TakenEmailException();
-    }
+  async logout() {
+    return;
   }
 
-  async restore(email: string) {
-    const user = await this.userService.findOneByEmail(email);
-    const payload = { username: user.email, sub: user.id };
+  private async generateTokens(payload: TokenData): Promise<TokensPair> {
+    const accessToken = this.jwtService.sign(payload, {
+      secret: jwtAccessSecret,
+      expiresIn: '30s',
+    });
+    const refreshToken = this.jwtService.sign(payload, {
+      secret: jwtRefreshSecret,
+      expiresIn: '90s',
+    });
+
     return {
-      accessToken: this.jwtService.sign(payload),
-      email: user.email,
-      id: user.id,
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 }

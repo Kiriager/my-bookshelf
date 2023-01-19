@@ -1,3 +1,3 @@
-import { LoginDto } from './login.dto';
+import { AuthDto } from './login.dto';
 
-export class RegistrationDto extends LoginDto {}
+export class RegistrationDto extends AuthDto {}

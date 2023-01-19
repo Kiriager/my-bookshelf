@@ -46,14 +46,14 @@ export function registrationRequest(payload: RegistrationRequestData): Registrat
 //   return { type: LOGIN_FAILED, payload };
 // }
 
-export function restoreSessionRequest(): RestoreSessionRequestAction {
-  return { type: RESTORE_SESSION_REQUEST };
-}
+// export function restoreSessionRequest(): RestoreSessionRequestAction {
+//   return { type: RESTORE_SESSION_REQUEST };
+// }
 
-export function restoreSessionSuccess(): RestoreSessionSuccessAction {
-  return { type: RESTORE_SESSION_SUCCESS };
-}
+// export function restoreSessionSuccess(): RestoreSessionSuccessAction {
+//   return { type: RESTORE_SESSION_SUCCESS };
+// }
 
-export function restoreSessionFailed(payload: any): RestoreSessionFailedAction {
-  return { type: RESTORE_SESSION_FAILED, payload };
-}
+// export function restoreSessionFailed(payload: any): RestoreSessionFailedAction {
+//   return { type: RESTORE_SESSION_FAILED, payload };
+// }
